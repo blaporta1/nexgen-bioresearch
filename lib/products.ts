@@ -23,6 +23,7 @@ export interface Product {
   inStock: boolean
   coaUrl: string
   color: string
+  image: string
 }
 
 export interface ProductSize {
@@ -58,6 +59,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-001.pdf',
     color: '#1568D3',
+    image: '/images/products/bpc-157.png',
   },
   {
     id: 'tb500',
@@ -84,6 +86,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-002.pdf',
     color: '#0F4FA8',
+    image: '/images/products/tb-500.png',
   },
   {
     id: 'cjc1295',
@@ -110,6 +113,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-003.pdf',
     color: '#1568D3',
+    image: '/images/products/cjc-1295.png',
   },
   {
     id: 'ipamorelin',
@@ -136,6 +140,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-004.pdf',
     color: '#5B6B80',
+    image: '/images/products/ipamorelin.png',
   },
   {
     id: 'semaglutide',
@@ -162,6 +167,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-005.pdf',
     color: '#0A3880',
+    image: '/images/products/semaglutide.png',
   },
   {
     id: 'ghkcu',
@@ -188,6 +194,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-006.pdf',
     color: '#1568D3',
+    image: '/images/products/ghk-cu.png',
   },
   {
     id: 'melanotan2',
@@ -213,6 +220,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-007.pdf',
     color: '#5B6B80',
+    image: '/images/products/melanotan-ii.png',
   },
   {
     id: 'thymosin-alpha1',
@@ -238,6 +246,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-008.pdf',
     color: '#1568D3',
+    image: '/images/products/thymosin-alpha-1.png',
   },
   {
     id: 'follistatin344',
@@ -263,6 +272,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-009.pdf',
     color: '#0A3880',
+    image: '/images/products/bpc-157.png',
   },
   {
     id: 'wolverine-stack',
@@ -288,6 +298,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-010.pdf',
     color: '#0F4FA8',
+    image: '/images/products/wolverine-stack.png',
   },
   {
     id: 'bac-water',
@@ -313,6 +324,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-BAC.pdf',
     color: '#C2D8E0',
+    image: '/images/products/bpc-157.png',
   },
   {
     id: 'insulin-syringes',
@@ -338,6 +350,7 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     coaUrl: '/coa/NXG-2026-Q2-SYR.pdf',
     color: '#5B6B80',
+    image: '/images/products/bpc-157.png',
   },
 ]
 

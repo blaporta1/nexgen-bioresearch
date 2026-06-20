@@ -184,21 +184,22 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.slug}`}>
       <div className="product-card bg-white rounded-2xl border border-frost overflow-hidden h-full flex flex-col cursor-pointer">
-        {/* Image/graphic area */}
+        {/* Product image */}
         <div
-          className="relative flex items-center justify-center"
-          style={{ height: 140, background: 'linear-gradient(135deg, #F4F7FB 0%, #E8F1FB 100%)' }}
+          className="relative overflow-hidden"
+          style={{ height: 200, background: '#F4F7FB' }}
         >
-          <div
-            className="absolute inset-0 opacity-25"
+          <img
+            src={product.image}
+            alt={product.name}
             style={{
-              backgroundImage: 'radial-gradient(circle, #C2D8E0 1px, transparent 1px)',
-              backgroundSize: '16px 16px',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              display: 'block',
             }}
           />
-          <div className="relative">
-            <NexGenMark size={64} navyColor="#0E1B2E" signalColor="#1568D3" />
-          </div>
           {product.featured && (
             <span
               className="absolute top-3 left-3 tag"

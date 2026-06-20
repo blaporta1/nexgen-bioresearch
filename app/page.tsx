@@ -294,19 +294,17 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {FEATURED.map(product => (
               <Link key={product.id} href={`/products/${product.slug}`}>
-                <div className="product-card bg-white rounded-2xl border border-frost p-6 h-full cursor-pointer">
-                  {/* Molecular icon area */}
+                <div className="product-card bg-white rounded-2xl border border-frost overflow-hidden h-full cursor-pointer flex flex-col">
+                  {/* Product image */}
                   <div
-                    className="rounded-xl mb-5 flex items-center justify-center relative overflow-hidden"
-                    style={{ height: 120, background: '#F4F7FB' }}
+                    className="relative overflow-hidden flex-shrink-0"
+                    style={{ height: 180, background: '#F4F7FB' }}
                   >
-                    <div className="absolute inset-0 opacity-30"
-                      style={{
-                        backgroundImage: 'radial-gradient(circle, #C2D8E0 1px, transparent 1px)',
-                        backgroundSize: '16px 16px',
-                      }}
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                     />
-                    <NexGenMark size={60} navyColor="#0E1B2E" signalColor="#1568D3" />
                     {product.category === 'wolverine-stack' && (
                       <span
                         className="absolute top-2 right-2 tag"
@@ -317,11 +315,12 @@ export default function HomePage() {
                     )}
                   </div>
 
-                  {/* Meta */}
+                  {/* Card body */}
+                  <div className="p-5 flex flex-col flex-1">
                   <p className="data-label mb-1.5">{product.categoryLabel}</p>
                   <h3
                     className="text-navy font-semibold mb-2"
-                    style={{ fontSize: 16, fontWeight: 600 }}
+                    style={{ fontSize: 15, fontWeight: 600 }}
                   >
                     {product.name}
                   </h3>
@@ -348,6 +347,7 @@ export default function HomePage() {
                       View Details
                       <ChevronRight size={14} />
                     </span>
+                  </div>
                   </div>
                 </div>
               </Link>

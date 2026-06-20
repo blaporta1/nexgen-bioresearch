@@ -30,33 +30,36 @@ export default function ProductPageClient({ product, related }: Props) {
           {/* Left — Visual */}
           <div>
             <div
-              className="rounded-2xl relative overflow-hidden flex items-center justify-center"
-              style={{ height: 380, background: 'linear-gradient(135deg, #0E1B2E 0%, #0D2A60 100%)' }}
+              className="rounded-2xl relative overflow-hidden"
+              style={{ background: '#F4F7FB' }}
             >
-              <div
-                className="absolute inset-0 opacity-20"
+              {/* Product image */}
+              <img
+                src={product.image}
+                alt={product.name}
                 style={{
-                  backgroundImage: 'radial-gradient(circle, #3A85E0 1px, transparent 1px)',
-                  backgroundSize: '24px 24px',
+                  width: '100%',
+                  aspectRatio: '1 / 1',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                  display: 'block',
                 }}
               />
-              <div className="scan-line" />
-              <div className="relative">
-                <NexGenMark size={160} navyColor="#FFFFFF" signalColor="#1568D3" />
-              </div>
+              {/* Purity overlay badge */}
               <div
                 className="absolute top-4 left-4 rounded-xl px-3 py-2"
-                style={{ background: 'rgba(21,104,211,0.2)', border: '1px solid rgba(58,133,224,0.3)' }}
+                style={{ background: 'rgba(14,27,46,0.75)', border: '1px solid rgba(21,104,211,0.4)', backdropFilter: 'blur(8px)' }}
               >
-                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: '#3A85E0', letterSpacing: '0.06em' }}>HPLC PURITY</p>
+                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 10, color: '#6BA3E2', letterSpacing: '0.06em' }}>HPLC PURITY</p>
                 <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 22, fontWeight: 700, color: '#3A85E0' }}>{product.purity}</p>
               </div>
+              {/* Batch overlay */}
               <div
                 className="absolute bottom-4 right-4 rounded-xl px-3 py-2 text-right"
-                style={{ background: 'rgba(14,27,46,0.6)', border: '1px solid rgba(255,255,255,0.1)' }}
+                style={{ background: 'rgba(14,27,46,0.75)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
               >
-                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 9, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em' }}>BATCH</p>
-                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'rgba(255,255,255,0.7)' }}>{product.batchNumber}</p>
+                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 9, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em' }}>BATCH</p>
+                <p style={{ fontFamily: 'var(--font-jetbrains)', fontSize: 11, color: 'rgba(255,255,255,0.75)' }}>{product.batchNumber}</p>
               </div>
             </div>
 
@@ -150,15 +153,21 @@ export default function ProductPageClient({ product, related }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {related.map(rp => (
                 <Link key={rp.id} href={`/products/${rp.slug}`}>
-                  <div className="product-card bg-white rounded-2xl border border-frost p-5 cursor-pointer">
-                    <div className="rounded-xl mb-4 flex items-center justify-center" style={{ height: 80, background: '#F4F7FB' }}>
-                      <NexGenMark size={40} navyColor="#0E1B2E" signalColor="#1568D3" />
+                  <div className="product-card bg-white rounded-2xl border border-frost overflow-hidden cursor-pointer">
+                    <div className="overflow-hidden" style={{ height: 140, background: '#F4F7FB' }}>
+                      <img
+                        src={rp.image}
+                        alt={rp.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                      />
                     </div>
-                    <p className="data-label mb-1">{rp.categoryLabel}</p>
-                    <h3 className="text-navy font-semibold mb-2 text-sm">{rp.name}</h3>
-                    <div className="flex items-center justify-between">
-                      <span className="purity-badge">{rp.purity}</span>
-                      <span className="text-navy font-bold">${rp.sizes[0].price.toFixed(2)}</span>
+                    <div className="p-4">
+                      <p className="data-label mb-1">{rp.categoryLabel}</p>
+                      <h3 className="text-navy font-semibold mb-2 text-sm">{rp.name}</h3>
+                      <div className="flex items-center justify-between">
+                        <span className="purity-badge">{rp.purity}</span>
+                        <span className="text-navy font-bold">${rp.sizes[0].price.toFixed(2)}</span>
+                      </div>
                     </div>
                   </div>
                 </Link>
