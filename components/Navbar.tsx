@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ShoppingCart, Menu, X, ChevronDown } from 'lucide-react'
+import { ShoppingCart, Menu, X } from 'lucide-react'
 import NexGenLogo from './NexGenLogo'
 
 const NAV_LINKS = [
@@ -20,12 +20,16 @@ export default function Navbar() {
   const pathname = usePathname()
 
   useEffect(() => {
+    // Set initial state based on current scroll position
+    setScrolled(window.scrollY > 20)
     const handler = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handler)
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
   const isHeroPage = pathname === '/'
+  // True when we want the dark-hero treatment (top of homepage only)
+  const heroMode = isHeroPage && !scrolled
 
   return (
     <>
@@ -37,17 +41,24 @@ export default function Navbar() {
 
       {/* Main Nav */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled || !isHeroPage
-            ? 'nav-glass shadow-sm'
-            : 'bg-transparent'
-        }`}
+        className="sticky top-0 z-50 transition-all duration-300"
+        style={{
+          background: heroMode
+            ? 'rgba(10, 18, 36, 0.82)'
+            : 'rgba(255, 255, 255, 0.96)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: heroMode
+            ? '1px solid rgba(255,255,255,0.07)'
+            : '1px solid rgba(14,27,46,0.08)',
+          boxShadow: heroMode ? 'none' : '0 1px 20px rgba(14,27,46,0.06)',
+        }}
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo — always visible: white on dark hero, navy on white nav */}
           <Link href="/" className="flex-shrink-0">
             <NexGenLogo
-              variant={!scrolled && isHeroPage ? 'light' : 'dark'}
+              variant={heroMode ? 'light' : 'dark'}
               size="sm"
             />
           </Link>
@@ -58,13 +69,24 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-150 ${
-                  pathname === link.href
-                    ? 'text-signal'
-                    : !scrolled && isHeroPage
-                    ? 'text-white/80 hover:text-white'
-                    : 'text-navy/70 hover:text-navy'
-                }`}
+                className="text-sm font-medium transition-colors duration-150"
+                style={{
+                  color: pathname === link.href
+                    ? '#1568D3'
+                    : heroMode
+                    ? 'rgba(255,255,255,0.75)'
+                    : 'rgba(14,27,46,0.65)',
+                }}
+                onMouseEnter={e => {
+                  if (pathname !== link.href)
+                    (e.currentTarget as HTMLElement).style.color = heroMode ? '#fff' : '#0E1B2E'
+                }}
+                onMouseLeave={e => {
+                  if (pathname !== link.href)
+                    (e.currentTarget as HTMLElement).style.color = heroMode
+                      ? 'rgba(255,255,255,0.75)'
+                      : 'rgba(14,27,46,0.65)'
+                }}
               >
                 {link.label}
               </Link>
@@ -76,11 +98,8 @@ export default function Navbar() {
             {/* Cart */}
             <Link
               href="/cart"
-              className={`relative p-2 rounded-lg transition-colors ${
-                !scrolled && isHeroPage
-                  ? 'text-white/80 hover:text-white hover:bg-white/10'
-                  : 'text-navy/70 hover:text-navy hover:bg-cloud'
-              }`}
+              className="relative p-2 rounded-lg transition-colors"
+              style={{ color: heroMode ? 'rgba(255,255,255,0.75)' : 'rgba(14,27,46,0.65)' }}
             >
               <ShoppingCart size={20} />
               {cartCount > 0 && (
@@ -101,9 +120,8 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`md:hidden p-2 rounded-lg ${
-                !scrolled && isHeroPage ? 'text-white' : 'text-navy'
-              }`}
+              className="md:hidden p-2 rounded-lg"
+              style={{ color: heroMode ? '#fff' : '#0E1B2E' }}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
